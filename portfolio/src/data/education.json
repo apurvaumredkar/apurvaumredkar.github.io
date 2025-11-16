@@ -1,16 +1,18 @@
 {
   "education": [
     {
-      "degree": "Master's, Computer Science (AI/ML)",
+      "degree": "MS Computer Science & Engineering (AI/ML)",
       "school": "University at Buffalo",
-      "gpa": "GPA: 3.78/4",
-      "period": "08/2024 – Present"
+      "gpa": "",
+      "period": "08/2024 – Present",
+      "logo": "ub"
     },
     {
-      "degree": "Bachelor's, Electronics & Communication",
-      "school": "National Institute of Technology Nagpur",
+      "degree": "BTech Electronics & Communication Engineering",
+      "school": "Visvesvaraya National Institute of Technology Nagpur",
       "gpa": "",
-      "period": "07/2018 – 05/2022"
+      "period": "07/2018 – 05/2022",
+      "logo": "vnit"
     }
   ]
 }

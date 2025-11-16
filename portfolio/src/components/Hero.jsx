@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import profilePic from '../assets/profile.jpg'
+import resumePdf from '../assets/Resume_Apurva_Umredkar.pdf'
 
 const ResumeModal = ({ onClose }) => {
   return (
@@ -28,7 +29,7 @@ const ResumeModal = ({ onClose }) => {
               onClick={(e) => {
                 e.stopPropagation()
                 const link = document.createElement('a')
-                link.href = '/Resume_Apurva_Umredkar.pdf'
+                link.href = resumePdf
                 link.download = 'Resume_Apurva_Umredkar.pdf'
                 document.body.appendChild(link)
                 link.click()
@@ -50,7 +51,7 @@ const ResumeModal = ({ onClose }) => {
         {/* PDF Viewer */}
         <div className="flex-1 overflow-hidden rounded-2xl">
           <iframe
-            src="/Resume_Apurva_Umredkar.pdf"
+            src={resumePdf}
             className="w-full h-full"
             title="Resume PDF"
           />
@@ -76,7 +77,7 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-8 flex justify-center"
+          className="mb-8 flex justify-center relative z-50"
         >
           <img
             src={profilePic}
@@ -86,7 +87,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.pre
-          className="text-[0.4rem] md:text-[0.6rem] lg:text-xs font-mono mb-6 leading-tight text-gray-900 dark:text-gray-100 overflow-x-auto"
+          className="text-[0.4rem] md:text-[0.6rem] lg:text-xs font-mono mb-3 leading-tight text-gray-900 dark:text-gray-100 overflow-x-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -104,12 +105,12 @@ const Hero = () => {
         </motion.pre>
 
         <motion.p
-          className="text-2xl md:text-4xl text-gray-600 dark:text-gray-300 mb-10 font-semibold uppercase"
+          className="text-base md:text-2xl text-gray-600 dark:text-gray-300 mb-10 font-semibold uppercase"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          AI Engineer. Builder. Problem Solver.
+          AI Engineer ● Research Enthusiast
         </motion.p>
 
         <motion.button
@@ -117,7 +118,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="inline-block bg-black text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors"
+          className="inline-block bg-transparent text-black dark:text-white border-4 border-black dark:border-white px-10 py-3 rounded-full text-3xl font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
         >
           MY RESUME
         </motion.button>

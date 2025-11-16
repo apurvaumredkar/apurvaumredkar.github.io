@@ -1,5 +1,4 @@
 import Navbar from './components/Navbar'
-import SocialSidebar from './components/SocialSidebar'
 import Hero from './components/Hero'
 import Experience from './components/Experience'
 import Projects from './components/Projects'
@@ -11,7 +10,6 @@ function App() {
     <div className="overflow-x-hidden bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
       <NetBackground />
       <Navbar />
-      <SocialSidebar />
       <Hero />
       <Experience />
       <Projects />

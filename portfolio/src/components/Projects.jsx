@@ -72,15 +72,15 @@ const ProjectCard = ({ title, tech, onClick, delay, colorIndex }) => {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay }}
       onClick={onClick}
-      className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 aspect-square flex flex-col justify-center items-center hover:shadow-xl transition-all duration-300 cursor-pointer hover:scale-105 group relative overflow-hidden"
+      className="bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 aspect-square flex flex-col justify-center items-center shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer hover:scale-105 group relative overflow-hidden"
       style={{
         backgroundColor: isHovered ? hoverColor : undefined,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-center dark:text-white">{title}</h3>
-      <p className="text-xs text-gray-500 dark:text-gray-400 font-mono text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">{tech}</p>
+      <h3 className={`text-2xl md:text-3xl font-semibold mb-4 text-center transition-colors duration-300 ${isHovered ? 'text-gray-900' : 'text-gray-800 dark:text-white'}`}>{title}</h3>
+      <p className={`text-xs font-mono text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isHovered ? 'text-gray-700' : 'text-gray-500 dark:text-gray-400'}`}>{tech}</p>
     </motion.div>
   )
 }
