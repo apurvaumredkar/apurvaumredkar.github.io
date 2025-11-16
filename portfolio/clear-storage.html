@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Storage</title>
+</head>
+<body>
+    <h1>Clearing localStorage and forcing refresh...</h1>
+    <script>
+        // Clear all localStorage
+        localStorage.clear();
+
+        // Remove dark class
+        document.documentElement.classList.remove('dark');
+
+        alert('Storage cleared! Click OK to redirect to the app.');
+
+        // Redirect to the app
+        window.location.href = 'http://localhost:5180/';
+    </script>
+</body>
+</html>
