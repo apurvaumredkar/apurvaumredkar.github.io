@@ -28,20 +28,17 @@ const Navbar = () => {
 
   const toggleDarkMode = () => {
     const newDarkMode = !isDarkMode
-    console.log('Toggle clicked. Current:', isDarkMode, '-> New:', newDarkMode)
     setIsDarkMode(newDarkMode)
 
     if (newDarkMode) {
       document.documentElement.classList.add('dark')
       localStorage.setItem('darkMode', 'true')
-      console.log('Added dark class. Classes:', document.documentElement.className)
     } else {
       document.documentElement.classList.remove('dark')
       localStorage.setItem('darkMode', 'false')
-      console.log('Removed dark class. Classes:', document.documentElement.className)
     }
 
-    // Force a re-render by dispatching a custom event
+    // Notify other components of dark mode change
     window.dispatchEvent(new CustomEvent('darkModeChange', { detail: { isDark: newDarkMode } }))
   }
 
