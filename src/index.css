@@ -7,6 +7,7 @@
   --color-apple-gray: #1d1d1f;
   --font-family-sf-pro: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', sans-serif;
   --font-family-playfair: 'Playfair Display', serif;
+  --font-family-montserrat: 'Montserrat', sans-serif;
 }
 
 * {
@@ -22,4 +23,11 @@ body {
   margin: 0;
   font-family: 'Playfair Display', serif;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button, a[role="button"] {
+  font-family: 'Montserrat', sans-serif !important;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }

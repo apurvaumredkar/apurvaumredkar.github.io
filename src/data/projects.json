@@ -2,13 +2,36 @@
   "projects": [
     {
       "id": 1,
-      "title": "On-device Agentic AI Assistant",
-      "tech": "VLMs, Ollama, MCP Servers, LangGraph, SQLite, ChromaDB",
-      "githubUrl": "",
+      "title": "Project CASIE: Context Aware Small Intelligence on Edge",
+      "tech": "VLMs, CloudFlare Workers, Agentic RAG",
+      "githubUrl": "https://github.com/apurvaumredkar/casie",
       "huggingFaceUrl": "",
       "points": [
-        "Designed and implemented a local, privacy-focused agentic chatbot leveraging agentic orchestration frameworks and iterative Plan-Action-Reflect loops to enable dynamic task planning, visual reasoning, and tool invocation without external dependencies.",
-        "Developed a multi-tier memory architecture for short, episodic, and long-term memory retention, integrating Spotify, Notion, Google Workspace, internal file system and web search MCP servers to extend agent capabilities while ensuring on-device execution."
+        "A serverless Discord bot running on Cloudflare Workers at 300+ edge locations worldwide, demonstrating modern serverless architecture and edge computing.",
+        {
+          "title": "AI & Conversation",
+          "items": [
+            "Conversational AI with 2-hour context memory for natural dialogue",
+            "Intelligent web search with AI-powered summarization",
+            "PDF document analysis and question answering"
+          ]
+        },
+        {
+          "title": "Media Library",
+          "items": [
+            "Natural language TV show browsing: 'list available shows', 'how many episodes of Friends?'",
+            "Smart playback control: 'play Brooklyn Nine-Nine S01E01'",
+            "LLM-based routing between browse and play modes"
+          ]
+        },
+        {
+          "title": "Spotify Integration",
+          "items": [
+            "OAuth authentication for secure Spotify access",
+            "Track search, playback control, and playlist management",
+            "Real-time now playing displays with album artwork"
+          ]
+        }
       ]
     },
     {
@@ -16,11 +39,27 @@
       "title": "UBAssist: RAG-powered University Chatbot",
       "tech": "LLMs, RAG, Cursor, Hugging Face, Docker, FAISS, LoRA, QLoRA",
       "githubUrl": "https://github.com/apurvaumredkar/UBAssist",
-      "huggingFaceUrl": "https://huggingface.co/spaces/apurvau/UBAssist",
+      "huggingFaceUrl": "https://huggingface.co/spaces/TeamSAS/UB_VSA",
       "points": [
-        "Developed an end-to-end AI chatbot using a fine-tuned Microsoft Phi 1.5 model with parameter-efficient training techniques, achieving 48% faster training and 12 percentage point improvement in answer accuracy.",
-        "Built knowledge base of 18,000+ university documents with hybrid search capabilities, enabling real-time responses while reducing incorrect answers by 30% compared to baseline models.",
-        "Deployed scalable web application using Flask, FastAPI, and Docker on cloud infrastructure, optimizing model to run efficiently with only 13M parameters while maintaining performance."
+        "An intelligent university assistant providing instant answers to student queries about courses, policies, and campus information.",
+        {
+          "title": "Key Features",
+          "items": [
+            "Fine-tuned Microsoft Phi 1.5 model with LoRA/QLoRA (48% faster training, 12% better accuracy)",
+            "18,000+ university documents with hybrid dense/sparse retrieval",
+            "30% fewer incorrect responses vs. standard RAG implementations",
+            "Real-time answers with conversational context"
+          ]
+        },
+        {
+          "title": "Technical Implementation",
+          "items": [
+            "Production-ready deployment with Flask, FastAPI, and Docker",
+            "Efficient 13M parameter model with optimized architecture",
+            "FAISS vector database for fast semantic search",
+            "Deployed on Hugging Face Spaces for easy access"
+          ]
+        }
       ]
     },
     {
@@ -28,11 +67,63 @@
       "title": "Grayscale to RGB Image Colorization",
       "tech": "CNN, UNet, Vision Transformers, GANs, Gradio",
       "githubUrl": "https://github.com/apurvaumredkar/gray2rgb",
-      "huggingFaceUrl": "https://huggingface.co/spaces/apurvau/gray2rgb",
+      "huggingFaceUrl": "https://huggingface.co/spaces/TeamSAS/ImageColorizer",
       "points": [
-        "Built complete machine learning workflow using U-Net architecture augmented with Vision Transformer (ViT) blocks, attention gates, and patch discriminator-based adversarial training, achieving 94.15% structural similarity with ground truth images on test set of 5,000 images.",
-        "Improved model color fidelity using a weighted loss function for rare color classes and patch-level GAN loss to enforce realism and texture consistency.",
-        "Deployed as an interactive Gradio application on Hugging Face Spaces, enabling real-time image colorization with sub-second inference time."
+        "Transform black-and-white photos into vibrant color images using deep learning. Perfect for restoring old photographs or adding life to grayscale artwork.",
+        {
+          "title": "Architecture & Performance",
+          "items": [
+            "U-Net with Vision Transformer blocks and attention gates",
+            "Patch discriminator-based adversarial training (GAN)",
+            "94.15% structural similarity on 5,000 test images",
+            "Sub-second inference time for real-time results"
+          ]
+        },
+        {
+          "title": "Advanced Techniques",
+          "items": [
+            "Weighted loss function for handling rare color classes",
+            "Patch-level GAN loss for photorealistic texture consistency",
+            "Learned complex color relationships for natural results"
+          ]
+        },
+        {
+          "title": "Try It Now",
+          "items": [
+            "Interactive Gradio web app on Hugging Face Spaces",
+            "Upload any grayscale image and get instant colorization",
+            "No signup required - try it directly in your browser"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Phase Classification in Sleep Signals using CRNNs",
+      "tech": "Deep Learning, Inception, GRU, EEG Signal Processing",
+      "githubUrl": "https://github.com/apurvaumredkar/CAP-Classification-CRNN",
+      "huggingFaceUrl": "",
+      "paperUrl": "CAP_RP_Draft_v5.pdf",
+      "points": [
+        "Automated EEG sleep phase classification system that identifies Cyclic Alternating Patterns (CAP) in sleep recordings, eliminating the need for manual expert analysis.",
+        {
+          "title": "Architecture & Performance",
+          "items": [
+            "Hybrid Inception-GRU architecture for temporal pattern recognition",
+            "74.64% accuracy with 83.4% A-phase sensitivity on 9,306 samples",
+            "Processes 2-second EEG windows at 512 Hz sampling rate",
+            "Trained on PhysioNet CAP Sleep Database with 16 subjects"
+          ]
+        },
+        {
+          "title": "Technical Features",
+          "items": [
+            "Support for C4-A1 and C3-A2 EEG channels",
+            "Multiple validation strategies: hold-out and k-fold cross-validation",
+            "Balanced dataset construction for robust training",
+            "MATLAB preprocessing pipeline for signal conditioning"
+          ]
+        }
       ]
     }
   ]

@@ -20,17 +20,17 @@ const ExperienceCard = ({ title, company, period, delay, yearRange, logo }) => {
     <div className="flex gap-4 md:gap-8 mb-20">
       {/* Timeline marker - hidden on mobile */}
       <div className="hidden md:flex flex-shrink-0 w-20 relative self-stretch">
-        <div className="absolute left-1/2 -translate-x-1/2 top-8 bottom-8 w-0.5 bg-gray-300 dark:bg-gray-700"></div>
+        <div className="absolute left-1/2 -translate-x-1/2 top-8 bottom-8 w-0.5 bg-gray-300"></div>
         <div className="absolute left-1/2 -translate-x-1/2 top-8">
-          <div className="w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 border-2 border-white dark:border-gray-900"></div>
+          <div className="w-3 h-3 rounded-full bg-gray-400 border-2 border-white"></div>
         </div>
         <div className="absolute left-1/2 -translate-x-1/2 bottom-8">
-          <div className="w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 border-2 border-white dark:border-gray-900"></div>
+          <div className="w-3 h-3 rounded-full bg-gray-400 border-2 border-white"></div>
         </div>
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 text-2xl font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+        <div className="absolute left-1/2 -translate-x-1/2 top-0 text-2xl font-semibold text-gray-700 whitespace-nowrap">
           {endYear}
         </div>
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-0 text-2xl font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-0 text-2xl font-semibold text-gray-700 whitespace-nowrap">
           {startYear}
         </div>
       </div>
@@ -41,11 +41,11 @@ const ExperienceCard = ({ title, company, period, delay, yearRange, logo }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay }}
-        className="flex-1 bg-gray-50 dark:bg-gray-800 rounded-2xl p-12 flex items-center justify-between gap-6 shadow-lg hover:shadow-xl transition-shadow"
-        style={{ minHeight: '200px' }}
+        className="flex-1 bg-white/5 backdrop-blur-sm rounded-2xl p-12 flex items-center justify-between gap-6 shadow-lg hover:shadow-xl transition-shadow"
+        style={{ minHeight: '200px', backdropFilter: 'blur(4px)' }}
       >
         <div className="flex-1">
-          <p className="text-2xl font-semibold text-gray-800 dark:text-white">{title}</p>
+          <p className="text-2xl font-semibold text-gray-800">{title}</p>
         </div>
         {logo && (
           <div className="flex-shrink-0 flex items-center" style={{ width: '60%', maxWidth: '300px' }}>
@@ -86,17 +86,17 @@ const EducationCard = ({ degree, school, gpa, period, delay, logo }) => {
     <div className="flex gap-4 md:gap-8 mb-20">
       {/* Timeline marker - hidden on mobile */}
       <div className="hidden md:flex flex-shrink-0 w-20 relative self-stretch">
-        <div className="absolute left-1/2 -translate-x-1/2 top-8 bottom-8 w-0.5 bg-gray-300 dark:bg-gray-700"></div>
+        <div className="absolute left-1/2 -translate-x-1/2 top-8 bottom-8 w-0.5 bg-gray-300"></div>
         <div className="absolute left-1/2 -translate-x-1/2 top-8">
-          <div className="w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 border-2 border-white dark:border-gray-900"></div>
+          <div className="w-3 h-3 rounded-full bg-gray-400 border-2 border-white"></div>
         </div>
         <div className="absolute left-1/2 -translate-x-1/2 bottom-8">
-          <div className="w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 border-2 border-white dark:border-gray-900"></div>
+          <div className="w-3 h-3 rounded-full bg-gray-400 border-2 border-white"></div>
         </div>
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 text-2xl font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+        <div className="absolute left-1/2 -translate-x-1/2 top-0 text-2xl font-semibold text-gray-700 whitespace-nowrap">
           {endYear}
         </div>
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-0 text-2xl font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-0 text-2xl font-semibold text-gray-700 whitespace-nowrap">
           {startYear}
         </div>
       </div>
@@ -107,16 +107,16 @@ const EducationCard = ({ degree, school, gpa, period, delay, logo }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay }}
-        className="flex-1 bg-gray-50 dark:bg-gray-800 rounded-2xl p-12 flex items-center justify-between gap-6 shadow-lg hover:shadow-xl transition-shadow"
-        style={{ minHeight: '200px' }}
+        className="flex-1 bg-white/5 backdrop-blur-sm rounded-2xl p-12 flex items-center justify-between gap-6 shadow-lg hover:shadow-xl transition-shadow"
+        style={{ minHeight: '200px', backdropFilter: 'blur(4px)' }}
       >
         <div className="flex-1">
-          <p className="text-2xl font-semibold text-gray-800 dark:text-white">{degree}</p>
-          {gpa && <p className="text-lg text-gray-600 dark:text-gray-300 mt-2">{gpa}</p>}
+          <p className="text-2xl font-semibold text-gray-800">{degree}</p>
+          {gpa && <p className="text-lg text-gray-600 mt-2">{gpa}</p>}
         </div>
         {logo && (
           <div className="flex-shrink-0 flex items-center justify-center" style={{ width: '30%', maxWidth: '180px' }}>
-            <img src={logo} alt={school} className="w-full h-auto object-contain dark:invert" style={{ aspectRatio: '1' }} />
+            <img src={logo} alt={school} className="w-full h-auto object-contain" style={{ aspectRatio: '1' }} />
           </div>
         )}
       </motion.div>
@@ -168,14 +168,14 @@ const Experience = () => {
   return (
     <section id="experience" className="min-h-screen pt-28">
       {/* Headings section with black background */}
-      <div className="bg-white dark:bg-gray-900">
+      <div className="bg-white">
         <div className="flex w-full">
           <button
             onClick={() => setActiveTab('experience')}
             className={`text-4xl md:text-5xl font-semibold py-[72px] transition-all duration-300 uppercase flex items-center justify-center cursor-pointer ${
               activeTab === 'experience'
-                ? 'w-[70%] text-white bg-black dark:bg-white dark:text-black'
-                : 'w-[30%] text-black bg-white hover:bg-gray-100 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800'
+                ? 'w-[70%] text-white bg-black'
+                : 'w-[30%] text-black bg-white hover:bg-gray-100'
             }`}
           >
             Experience
@@ -184,8 +184,8 @@ const Experience = () => {
             onClick={() => setActiveTab('education')}
             className={`text-4xl md:text-5xl font-semibold py-[72px] transition-all duration-300 uppercase flex items-center justify-center cursor-pointer ${
               activeTab === 'education'
-                ? 'w-[70%] text-white bg-black dark:bg-white dark:text-black'
-                : 'w-[30%] text-black bg-white hover:bg-gray-100 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800'
+                ? 'w-[70%] text-white bg-black'
+                : 'w-[30%] text-black bg-white hover:bg-gray-100'
             }`}
           >
             Education
@@ -194,7 +194,7 @@ const Experience = () => {
       </div>
 
       {/* Content section with white background */}
-      <div className="bg-white dark:bg-gray-900 py-20 px-6 md:px-16 lg:px-32">
+      <div className="bg-white py-20 px-6 md:px-16 lg:px-32">
         <div className="max-w-5xl mx-auto">
           {activeTab === 'experience' ? (
             <>

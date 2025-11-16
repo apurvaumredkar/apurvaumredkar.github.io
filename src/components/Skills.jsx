@@ -16,7 +16,7 @@ const SkillIcon = ({ skill, delay }) => {
       transition={{ duration: 0.5, delay }}
       className="flex flex-col items-center gap-3 p-4"
     >
-      <div className="w-16 h-16 flex items-center justify-center bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+      <div className="w-16 h-16 flex items-center justify-center bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
         <img
           src={skill.icon}
           alt={skill.name}
@@ -26,7 +26,7 @@ const SkillIcon = ({ skill, delay }) => {
           }}
         />
       </div>
-      <span className="text-sm text-gray-700 dark:text-gray-300 font-medium text-center">{skill.name}</span>
+      <span className="text-sm text-gray-700 font-medium text-center">{skill.name}</span>
     </motion.div>
   )
 }
@@ -45,7 +45,7 @@ const SkillCategory = ({ category, delay }) => {
       transition={{ duration: 0.6, delay }}
       className="flex-1 min-w-0"
     >
-      <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800 dark:text-white uppercase">{category.title}</h3>
+      <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800 uppercase">{category.title}</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 justify-items-center">
         {category.skills.map((skill, idx) => (
           <SkillIcon key={skill.name} skill={skill} delay={delay + idx * 0.05} />
@@ -57,13 +57,13 @@ const SkillCategory = ({ category, delay }) => {
 
 const Skills = () => {
   return (
-    <section id="skills" className="min-h-screen py-32 px-6 md:px-16 lg:px-32 bg-white dark:bg-gray-900 pt-28">
+    <section id="skills" className="min-h-screen py-32 px-6 md:px-16 lg:px-32 bg-white pt-28">
       <motion.h2
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-5xl md:text-6xl font-semibold mb-20 text-center uppercase dark:text-white"
+        className="text-5xl md:text-6xl font-semibold mb-20 text-center uppercase"
       >
         Skills
       </motion.h2>

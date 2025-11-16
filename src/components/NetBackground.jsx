@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
 import netSvg from '../assets/net.svg'
-import netDarkSvg from '../assets/net-dark.svg'
 
 const NetBackground = () => {
   const [patches, setPatches] = useState([])
-  const [isDarkMode, setIsDarkMode] = useState(false)
 
   useEffect(() => {
     // Place a patch in every grid cell with random rotation
@@ -39,33 +37,6 @@ const NetBackground = () => {
     }
 
     generatePatches()
-
-    // Listen for dark mode changes
-    const checkDarkMode = () => {
-      setIsDarkMode(document.documentElement.classList.contains('dark'))
-    }
-
-    // Initial check
-    checkDarkMode()
-
-    // Listen for custom dark mode change event
-    const handleDarkModeChange = (e) => {
-      setIsDarkMode(e.detail.isDark)
-    }
-
-    window.addEventListener('darkModeChange', handleDarkModeChange)
-
-    // Create observer to watch for dark mode class changes
-    const observer = new MutationObserver(checkDarkMode)
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class']
-    })
-
-    return () => {
-      window.removeEventListener('darkModeChange', handleDarkModeChange)
-      observer.disconnect()
-    }
   }, [])
 
   return (
@@ -73,7 +44,7 @@ const NetBackground = () => {
       {patches.map((patch) => (
         <img
           key={patch.id}
-          src={isDarkMode ? netDarkSvg : netSvg}
+          src={netSvg}
           alt=""
           className="absolute"
           style={{

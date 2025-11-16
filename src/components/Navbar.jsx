@@ -7,7 +7,6 @@ import mailIcon from '../assets/mail.svg'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,34 +15,6 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  useEffect(() => {
-    // Check localStorage and apply saved preference on initial load
-    const savedDarkMode = localStorage.getItem('darkMode') === 'true'
-    setIsDarkMode(savedDarkMode)
-
-    if (savedDarkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }, [])
-
-  const toggleDarkMode = () => {
-    const newDarkMode = !isDarkMode
-    setIsDarkMode(newDarkMode)
-
-    if (newDarkMode) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('darkMode', 'true')
-    } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('darkMode', 'false')
-    }
-
-    // Notify other components of dark mode change
-    window.dispatchEvent(new CustomEvent('darkModeChange', { detail: { isDark: newDarkMode } }))
-  }
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
@@ -79,7 +50,7 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm' : 'bg-transparent'
+        isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-sm' : 'bg-transparent'
       }`}
     >
       <div className="w-full px-6 md:px-16 lg:px-32 py-6 flex items-center justify-between">
@@ -92,9 +63,9 @@ const Navbar = () => {
               target={link.href.startsWith('http') ? '_blank' : undefined}
               rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               aria-label={link.label}
-              className="transition-all hover:scale-110"
+              className="transition-all hover:scale-110 py-3"
             >
-              <img src={link.icon} alt={link.label} className="w-10 h-10" />
+              <img src={link.icon} alt={link.label} className="w-8 h-8" />
             </a>
           ))}
         </div>
@@ -103,46 +74,29 @@ const Navbar = () => {
         <div className="flex gap-4 items-center">
           <button
             onClick={() => scrollToSection('hero')}
-            className="hover:opacity-70 transition-opacity"
+            className="hover:opacity-70 transition-opacity py-3"
             aria-label="Home"
           >
-            <img src={homeIcon} alt="Home" className="w-8 h-8 dark:invert" />
+            <img src={homeIcon} alt="Home" className="w-8 h-8" />
           </button>
 
           <button
             onClick={() => scrollToSection('experience')}
-            className="bg-black text-white px-8 py-3 rounded-full text-base font-medium hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors uppercase"
+            className="bg-black text-white px-8 py-3 rounded-full text-base font-medium hover:bg-gray-800 transition-colors uppercase"
           >
             MY BACKGROUND
           </button>
           <button
             onClick={() => scrollToSection('projects')}
-            className="bg-black text-white px-8 py-3 rounded-full text-base font-medium hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors uppercase"
+            className="bg-black text-white px-8 py-3 rounded-full text-base font-medium hover:bg-gray-800 transition-colors uppercase"
           >
             PROJECTS
           </button>
           <button
             onClick={() => scrollToSection('skills')}
-            className="bg-black text-white px-8 py-3 rounded-full text-base font-medium hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors uppercase"
+            className="bg-black text-white px-8 py-3 rounded-full text-base font-medium hover:bg-gray-800 transition-colors uppercase"
           >
             SKILLS
-          </button>
-
-          {/* Dark Mode Toggle */}
-          <button
-            onClick={toggleDarkMode}
-            className="w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
-            aria-label="Toggle dark mode"
-          >
-            {isDarkMode ? (
-              <svg className="w-6 h-6 text-gray-800 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6 text-gray-800 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-              </svg>
-            )}
           </button>
         </div>
       </div>
