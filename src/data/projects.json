@@ -5,6 +5,7 @@
       "title": "On-device Agentic AI Assistant",
       "tech": "VLMs, Ollama, MCP Servers, LangGraph, SQLite, ChromaDB",
       "githubUrl": "",
+      "huggingFaceUrl": "",
       "points": [
         "Designed and implemented a local, privacy-focused agentic chatbot leveraging agentic orchestration frameworks and iterative Plan-Action-Reflect loops to enable dynamic task planning, visual reasoning, and tool invocation without external dependencies.",
         "Developed a multi-tier memory architecture for short, episodic, and long-term memory retention, integrating Spotify, Notion, Google Workspace, internal file system and web search MCP servers to extend agent capabilities while ensuring on-device execution."
@@ -15,6 +16,7 @@
       "title": "UBAssist: RAG-powered University Chatbot",
       "tech": "LLMs, RAG, Cursor, Hugging Face, Docker, FAISS, LoRA, QLoRA",
       "githubUrl": "https://github.com/apurvaumredkar/UBAssist",
+      "huggingFaceUrl": "https://huggingface.co/spaces/apurvau/UBAssist",
       "points": [
         "Developed an end-to-end AI chatbot using a fine-tuned Microsoft Phi 1.5 model with parameter-efficient training techniques, achieving 48% faster training and 12 percentage point improvement in answer accuracy.",
         "Built knowledge base of 18,000+ university documents with hybrid search capabilities, enabling real-time responses while reducing incorrect answers by 30% compared to baseline models.",
@@ -26,6 +28,7 @@
       "title": "Grayscale to RGB Image Colorization",
       "tech": "CNN, UNet, Vision Transformers, GANs, Gradio",
       "githubUrl": "https://github.com/apurvaumredkar/gray2rgb",
+      "huggingFaceUrl": "https://huggingface.co/spaces/apurvau/gray2rgb",
       "points": [
         "Built complete machine learning workflow using U-Net architecture augmented with Vision Transformer (ViT) blocks, attention gates, and patch discriminator-based adversarial training, achieving 94.15% structural similarity with ground truth images on test set of 5,000 images.",
         "Improved model color fidelity using a weighted loss function for rare color classes and patch-level GAN loss to enforce realism and texture consistency.",

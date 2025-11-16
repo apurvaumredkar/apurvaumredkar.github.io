@@ -2,8 +2,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useState } from 'react'
 import projectsData from '../data/projects.json'
+import githubIcon from '../assets/github.svg'
 
 const ProjectModal = ({ project, onClose }) => {
+  const huggingFaceLogoUrl = "https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg"
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -40,16 +43,38 @@ const ProjectModal = ({ project, onClose }) => {
             </li>
           ))}
         </ul>
-        {project.githubUrl && (
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors"
-          >
-            View on GitHub
-          </a>
-        )}
+        <div className="flex gap-3 flex-wrap">
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors"
+            >
+              <img
+                src={githubIcon}
+                alt="GitHub"
+                className="w-4 h-4 dark:invert"
+              />
+              View on GitHub
+            </a>
+          )}
+          {project.huggingFaceUrl && (
+            <a
+              href={project.huggingFaceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors"
+            >
+              <img
+                src={huggingFaceLogoUrl}
+                alt="Hugging Face"
+                className="w-4 h-4"
+              />
+              Try it out
+            </a>
+          )}
+        </div>
       </motion.div>
     </motion.div>
   )
