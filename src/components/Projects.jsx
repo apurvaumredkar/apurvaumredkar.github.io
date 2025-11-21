@@ -221,7 +221,7 @@ const Projects = () => {
         viewport={{ once: true }}
         className="text-5xl md:text-6xl font-bold mb-24 text-center uppercase tracking-tight relative z-10"
       >
-        Selected Projects
+        Projects
       </motion.h2>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
