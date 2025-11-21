@@ -65,35 +65,48 @@ const Hero = () => {
   const [showResume, setShowResume] = useState(false)
 
   return (
-    <section id="hero" className="min-h-screen flex flex-col justify-center items-center px-6 bg-gradient-to-b from-white to-gray-50 pt-28">
+    <section id="hero" className="min-h-screen flex flex-col justify-center items-center px-6 bg-transparent pt-28 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-blue-100/20 blur-3xl"></div>
+        <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-purple-100/20 blur-3xl"></div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="text-center max-w-5xl"
+        className="text-center max-w-5xl relative z-10"
       >
         {/* Profile Picture */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-8 flex justify-center relative z-50"
+          className="mb-10 flex justify-center relative z-50"
         >
-          <img
-            src={profilePic}
-            alt="Apurva Umredkar"
-            className="w-[230px] h-[230px] md:w-[270px] md:h-[270px] rounded-full object-cover border-4 border-gray-200"
-          />
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="relative"
+          >
+            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 blur-lg opacity-20 scale-110"></div>
+            <img
+              src={profilePic}
+              alt="Apurva Umredkar"
+              className="w-[230px] h-[230px] md:w-[270px] md:h-[270px] rounded-full object-cover border-4 border-white shadow-2xl relative z-10"
+            />
+          </motion.div>
         </motion.div>
 
         <motion.pre
-          className="text-[0.4rem] md:text-[0.6rem] lg:text-xs font-mono mb-3 leading-tight text-gray-900 overflow-x-auto"
+          className="text-[0.4rem] md:text-[0.6rem] lg:text-xs font-mono mb-6 leading-tight text-gray-900 overflow-x-auto select-none opacity-80 hover:opacity-100 transition-opacity duration-300"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-{`
-
+          {`
+ 
  █████╗ ██████╗ ██╗   ██╗██████╗ ██╗   ██╗ █████╗     ██╗   ██╗███╗   ███╗██████╗ ███████╗██████╗ ██╗  ██╗ █████╗ ██████╗ 
 ██╔══██╗██╔══██╗██║   ██║██╔══██╗██║   ██║██╔══██╗    ██║   ██║████╗ ████║██╔══██╗██╔════╝██╔══██╗██║ ██╔╝██╔══██╗██╔══██╗
 ███████║██████╔╝██║   ██║██████╔╝██║   ██║███████║    ██║   ██║██╔████╔██║██████╔╝█████╗  ██║  ██║█████╔╝ ███████║██████╔╝
@@ -105,22 +118,30 @@ const Hero = () => {
         </motion.pre>
 
         <motion.p
-          className="text-base md:text-2xl text-gray-600 mb-10 font-semibold uppercase"
+          className="text-lg md:text-2xl text-gray-600 mb-12 font-light tracking-widest uppercase"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          AI Engineer ● Research Enthusiast
+          AI Engineer <span className="mx-2 text-gray-300">|</span> Research Enthusiast
         </motion.p>
 
         <motion.button
           onClick={() => setShowResume(true)}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="inline-block bg-transparent text-black border-[3.2px] border-black px-8 py-2.5 rounded-full text-2xl font-medium hover:bg-black hover:text-white transition-colors"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.3 }}
+          className="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-medium text-white bg-black rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
         >
-          MY RESUME
+          <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-800 rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+          <span className="relative flex items-center gap-2">
+            MY RESUME
+            <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </span>
         </motion.button>
       </motion.div>
 

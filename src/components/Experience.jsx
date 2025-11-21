@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useState } from 'react'
 import educationData from '../data/education.json'
@@ -17,38 +17,39 @@ const ExperienceCard = ({ title, company, period, delay, yearRange, logo }) => {
   const [startYear, endYear] = yearRange.split(' - ')
 
   return (
-    <div className="flex gap-4 md:gap-8 mb-20">
+    <div className="flex gap-4 md:gap-12 mb-16 relative group">
       {/* Timeline marker - hidden on mobile */}
-      <div className="hidden md:flex flex-shrink-0 w-20 relative self-stretch">
-        <div className="absolute left-1/2 -translate-x-1/2 top-8 bottom-8 w-0.5 bg-gray-300"></div>
-        <div className="absolute left-1/2 -translate-x-1/2 top-8">
-          <div className="w-3 h-3 rounded-full bg-gray-400 border-2 border-white"></div>
+      <div className="hidden md:flex flex-col items-center w-24 relative flex-shrink-0">
+        <div className="h-full w-[2px] bg-gray-200 absolute top-0 bottom-0 left-1/2 -translate-x-1/2 group-last:bottom-auto group-last:h-1/2"></div>
+        <div className="w-4 h-4 rounded-full bg-black border-4 border-white shadow-sm z-10 mt-8 relative">
+          <div className="absolute right-6 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400 whitespace-nowrap pr-2">{endYear}</div>
         </div>
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-8">
-          <div className="w-3 h-3 rounded-full bg-gray-400 border-2 border-white"></div>
-        </div>
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 text-2xl font-semibold text-gray-700 whitespace-nowrap">
-          {endYear}
-        </div>
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-0 text-2xl font-semibold text-gray-700 whitespace-nowrap">
-          {startYear}
+        <div className="flex-1"></div>
+        <div className="w-3 h-3 rounded-full bg-gray-300 border-2 border-white z-10 mb-8 relative">
+          <div className="absolute right-6 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400 whitespace-nowrap pr-2">{startYear}</div>
         </div>
       </div>
 
       {/* Card content */}
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
+        initial={{ opacity: 0, x: 20 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.6, delay }}
-        className="flex-1 bg-white/5 backdrop-blur-sm rounded-2xl p-12 flex items-center justify-between gap-6 shadow-lg hover:shadow-xl transition-shadow"
-        style={{ minHeight: '200px', backdropFilter: 'blur(4px)' }}
+        className="flex-1 bg-white rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center gap-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-gray-200"
       >
-        <div className="flex-1">
-          <p className="text-2xl font-semibold text-gray-800">{title}</p>
+        <div className="flex-1 space-y-4">
+          <div>
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">{title}</h3>
+            <p className="text-lg text-gray-600 font-medium">{company}</p>
+          </div>
+          <div className="flex items-center gap-2 text-sm text-gray-400 font-mono uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-green-500"></span>
+            {period}
+          </div>
         </div>
         {logo && (
-          <div className="flex-shrink-0 flex items-center" style={{ width: '60%', maxWidth: '300px' }}>
+          <div className="flex-shrink-0 md:w-48 w-32 self-start md:self-center opacity-80 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0 duration-500">
             <img src={logo} alt={company} className="w-full h-auto object-contain" />
           </div>
         )}
@@ -83,40 +84,40 @@ const EducationCard = ({ degree, school, gpa, period, delay, logo }) => {
   const [startYear, endYear] = yearRange.split(' - ')
 
   return (
-    <div className="flex gap-4 md:gap-8 mb-20">
+    <div className="flex gap-4 md:gap-12 mb-16 relative group">
       {/* Timeline marker - hidden on mobile */}
-      <div className="hidden md:flex flex-shrink-0 w-20 relative self-stretch">
-        <div className="absolute left-1/2 -translate-x-1/2 top-8 bottom-8 w-0.5 bg-gray-300"></div>
-        <div className="absolute left-1/2 -translate-x-1/2 top-8">
-          <div className="w-3 h-3 rounded-full bg-gray-400 border-2 border-white"></div>
+      <div className="hidden md:flex flex-col items-center w-24 relative flex-shrink-0">
+        <div className="h-full w-[2px] bg-gray-200 absolute top-0 bottom-0 left-1/2 -translate-x-1/2 group-last:bottom-auto group-last:h-1/2"></div>
+        <div className="w-4 h-4 rounded-full bg-black border-4 border-white shadow-sm z-10 mt-8 relative">
+          <div className="absolute right-6 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400 whitespace-nowrap pr-2">{endYear}</div>
         </div>
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-8">
-          <div className="w-3 h-3 rounded-full bg-gray-400 border-2 border-white"></div>
-        </div>
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 text-2xl font-semibold text-gray-700 whitespace-nowrap">
-          {endYear}
-        </div>
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-0 text-2xl font-semibold text-gray-700 whitespace-nowrap">
-          {startYear}
+        <div className="flex-1"></div>
+        <div className="w-3 h-3 rounded-full bg-gray-300 border-2 border-white z-10 mb-8 relative">
+          <div className="absolute right-6 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400 whitespace-nowrap pr-2">{startYear}</div>
         </div>
       </div>
 
       {/* Card content */}
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
+        initial={{ opacity: 0, x: 20 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.6, delay }}
-        className="flex-1 bg-white/5 backdrop-blur-sm rounded-2xl p-12 flex items-center justify-between gap-6 shadow-lg hover:shadow-xl transition-shadow"
-        style={{ minHeight: '200px', backdropFilter: 'blur(4px)' }}
+        className="flex-1 bg-white rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center gap-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-gray-200"
       >
-        <div className="flex-1">
-          <p className="text-2xl font-semibold text-gray-800">{degree}</p>
-          {gpa && <p className="text-lg text-gray-600 mt-2">{gpa}</p>}
+        <div className="flex-1 space-y-4">
+          <div>
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">{degree}</h3>
+            <p className="text-lg text-gray-600 font-medium">{school}</p>
+          </div>
+          <div className="flex flex-wrap gap-4 items-center text-sm text-gray-500">
+            <span className="font-mono uppercase tracking-wider bg-gray-100 px-3 py-1 rounded-full">{period}</span>
+            {gpa && <span className="font-semibold text-black bg-yellow-100 px-3 py-1 rounded-full">{gpa}</span>}
+          </div>
         </div>
         {logo && (
-          <div className="flex-shrink-0 flex items-center justify-center" style={{ width: '30%', maxWidth: '180px' }}>
-            <img src={logo} alt={school} className="w-full h-auto object-contain" style={{ aspectRatio: '1' }} />
+          <div className="flex-shrink-0 md:w-32 w-24 self-start md:self-center opacity-80 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0 duration-500">
+            <img src={logo} alt={school} className="w-full h-auto object-contain" />
           </div>
         )}
       </motion.div>
@@ -166,57 +167,79 @@ const Experience = () => {
   }))
 
   return (
-    <section id="experience" className="min-h-screen pt-28">
+    <section id="experience" className="min-h-screen pt-28 bg-transparent">
       {/* Headings section with black background */}
-      <div className="bg-white">
-        <div className="flex w-full">
+      <div className="bg-white/80 backdrop-blur-md sticky top-[80px] z-30 shadow-sm border-b border-white/20">
+        <div className="flex w-full max-w-7xl mx-auto">
           <button
             onClick={() => setActiveTab('experience')}
-            className={`text-4xl md:text-5xl font-semibold py-[72px] transition-all duration-300 uppercase flex items-center justify-center cursor-pointer ${
-              activeTab === 'experience'
-                ? 'w-[70%] text-white bg-black'
-                : 'w-[30%] text-black bg-white hover:bg-gray-100'
-            }`}
+            className={`text-2xl md:text-4xl font-bold py-8 md:py-12 transition-all duration-500 uppercase flex items-center justify-center cursor-pointer relative overflow-hidden group ${activeTab === 'experience'
+              ? 'w-[60%] text-white bg-black'
+              : 'w-[40%] text-gray-400 bg-gray-50 hover:bg-gray-100'
+              }`}
           >
-            Experience
+            <span className="relative z-10">Experience</span>
+            {activeTab === 'experience' && (
+              <motion.div
+                layoutId="activeTab"
+                className="absolute inset-0 bg-black"
+                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+              />
+            )}
           </button>
           <button
             onClick={() => setActiveTab('education')}
-            className={`text-4xl md:text-5xl font-semibold py-[72px] transition-all duration-300 uppercase flex items-center justify-center cursor-pointer ${
-              activeTab === 'education'
-                ? 'w-[70%] text-white bg-black'
-                : 'w-[30%] text-black bg-white hover:bg-gray-100'
-            }`}
+            className={`text-2xl md:text-4xl font-bold py-8 md:py-12 transition-all duration-500 uppercase flex items-center justify-center cursor-pointer relative overflow-hidden group ${activeTab === 'education'
+              ? 'w-[60%] text-white bg-black'
+              : 'w-[40%] text-gray-400 bg-gray-50 hover:bg-gray-100'
+              }`}
           >
-            Education
+            <span className="relative z-10">Education</span>
+            {activeTab === 'education' && (
+              <motion.div
+                layoutId="activeTab"
+                className="absolute inset-0 bg-black"
+                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+              />
+            )}
           </button>
         </div>
       </div>
 
-      {/* Content section with white background */}
-      <div className="bg-white py-20 px-6 md:px-16 lg:px-32">
-        <div className="max-w-5xl mx-auto">
-          {activeTab === 'experience' ? (
-            <>
-              {experiences.map((exp, idx) => (
-                <ExperienceCard
-                  key={idx}
-                  {...exp}
-                  delay={idx * 0.2}
-                />
-              ))}
-            </>
-          ) : (
-            <>
-              {education.map((edu, idx) => (
-                <EducationCard
-                  key={idx}
-                  {...edu}
-                  delay={idx * 0.1}
-                />
-              ))}
-            </>
-          )}
+      {/* Content section */}
+      <div className="py-20 px-6 md:px-16 lg:px-32">
+        <div className="max-w-6xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {activeTab === 'experience' ? (
+                <>
+                  {experiences.map((exp, idx) => (
+                    <ExperienceCard
+                      key={idx}
+                      {...exp}
+                      delay={idx * 0.1}
+                    />
+                  ))}
+                </>
+              ) : (
+                <>
+                  {education.map((edu, idx) => (
+                    <EducationCard
+                      key={idx}
+                      {...edu}
+                      delay={idx * 0.1}
+                    />
+                  ))}
+                </>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>

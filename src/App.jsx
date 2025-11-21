@@ -7,7 +7,7 @@ import NetBackground from './components/NetBackground'
 
 function App() {
   return (
-    <div className="overflow-x-hidden bg-white text-gray-900 min-h-screen">
+    <div className="overflow-x-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 text-gray-900 min-h-screen relative selection:bg-black selection:text-white">
       <NetBackground />
       <Navbar />
       <Hero />
@@ -16,7 +16,7 @@ function App() {
       <Skills />
 
       {/* Copyright Footer */}
-      <div className="fixed bottom-4 left-6 md:left-16 lg:left-32 text-xs text-gray-500 z-30">
+      <div className="fixed bottom-4 left-6 md:left-16 lg:left-32 text-xs text-gray-400 z-30 mix-blend-difference">
         © {new Date().getFullYear()} Apurva Umredkar
       </div>
     </div>
