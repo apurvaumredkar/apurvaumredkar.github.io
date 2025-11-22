@@ -2,6 +2,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Experience from './components/Experience'
 import Projects from './components/Projects'
+import Publication from './components/Publication'
 import Skills from './components/Skills'
 import NetBackground from './components/NetBackground'
 
@@ -13,6 +14,7 @@ function App() {
       <Hero />
       <Experience />
       <Projects />
+      <Publication />
       <Skills />
 
       {/* Copyright Footer */}

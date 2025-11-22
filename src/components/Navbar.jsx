@@ -49,11 +49,10 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-white/70 backdrop-blur-xl shadow-sm py-2' 
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${isScrolled
+          ? 'bg-white/70 backdrop-blur-xl shadow-sm py-2'
           : 'bg-transparent py-6'
-      }`}
+        }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Social Icons - Far Left */}
@@ -95,6 +94,12 @@ const Navbar = () => {
             className="text-xs font-semibold text-gray-600 hover:text-black px-4 py-2 rounded-full hover:bg-white transition-all duration-300 uppercase tracking-wider"
           >
             Projects
+          </button>
+          <button
+            onClick={() => scrollToSection('publication')}
+            className="text-xs font-semibold text-gray-600 hover:text-black px-4 py-2 rounded-full hover:bg-white transition-all duration-300 uppercase tracking-wider"
+          >
+            Publication
           </button>
           <button
             onClick={() => scrollToSection('skills')}
