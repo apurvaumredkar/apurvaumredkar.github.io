@@ -7,7 +7,7 @@ import capgeminiLogo from '../assets/capgemini.svg'
 import ubLogo from '../assets/ub.svg'
 import vnitLogo from '../assets/vnit.svg'
 
-const ExperienceCard = ({ title, company, period, delay, yearRange, logo }) => {
+const ExperienceCard = ({ title, roles, company, period, delay, yearRange, logo, active }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -39,14 +39,32 @@ const ExperienceCard = ({ title, company, period, delay, yearRange, logo }) => {
         className="flex-1 bg-white rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center gap-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-gray-200"
       >
         <div className="flex-1 space-y-4">
-          <div>
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">{title}</h3>
-            <p className="text-lg text-gray-600 font-medium">{company}</p>
-          </div>
-          <div className="flex items-center gap-2 text-sm text-gray-400 font-mono uppercase tracking-wider">
-            <span className="w-2 h-2 rounded-full bg-green-500"></span>
-            {period}
-          </div>
+          {roles ? (
+            <>
+              {roles.map((role, i) => (
+                <div key={i}>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">{role.title}</h3>
+                  <span className="flex items-center gap-2 text-sm text-gray-400 font-mono uppercase tracking-wider">
+                    <span className={`w-2 h-2 rounded-full ${active && i === 0 ? 'bg-green-500' : 'bg-gray-300'}`}></span>
+                    {role.period}
+                  </span>
+                  {i < roles.length - 1 && <div className="mt-4 border-t border-gray-100"></div>}
+                </div>
+              ))}
+              <p className="text-lg text-gray-600 font-medium">{company}</p>
+            </>
+          ) : (
+            <>
+              <div>
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">{title}</h3>
+                <p className="text-lg text-gray-600 font-medium">{company}</p>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-400 font-mono uppercase tracking-wider">
+                <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                {period}
+              </div>
+            </>
+          )}
         </div>
         {logo && (
           <div className="flex-shrink-0 md:w-48 w-32 self-start md:self-center opacity-80 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0 duration-500">
@@ -130,9 +148,12 @@ const Experience = () => {
 
   const experiences = [
     {
-      title: 'AI Product Development Intern',
+      roles: [
+        { title: 'AI Software Developer', period: '02/2026 – Present' },
+        { title: 'AI Product Development Intern', period: '09/2025 – 11/2025' },
+      ],
+      active: true,
       company: 'Vaspian LLC',
-      period: '09/2025 – Present',
       yearRange: '2025 - Present',
       logo: vaspianLogo,
       points: [
@@ -142,9 +163,11 @@ const Experience = () => {
       ],
     },
     {
-      title: 'SAP ABAP Technical Consultant',
+      roles: [
+        { title: 'Associate Consultant', period: '04/2024 – 07/2024' },
+        { title: 'Senior Analyst', period: '08/2022 – 03/2024' },
+      ],
       company: 'Capgemini Technology Services India Limited',
-      period: '08/2022 – 07/2024',
       yearRange: '2022 - 2024',
       logo: capgeminiLogo,
       points: [
