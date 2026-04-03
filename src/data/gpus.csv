@@ -1,0 +1,8 @@
+id,name,shortName,architecture,group,memoryGb,memoryType,bandwidthTBs,tdpW,interconnect,nvlinkBw,fp16Tflops,fp8Tflops,baseTpsPerCard,baseTtftMs,rackSize,priceUSD,note
+h200-hgx,"NVIDIA H200 SXM (HGX)",H200 SXM,Hopper,"Hopper Generation (2022)",141,HBM3e,4.8,700,nvlink,"900 GB/s",1979,3958,550,60,"10–12U",35000,"NVLink 4.0 tensor-parallel — all cards pool memory & compute"
+b200,"NVIDIA HGX B200 (8× GPU)",HGX B200,Blackwell,"Blackwell Generation (2025)",180,HBM3e,7.7,1000,nvlink,"1800 GB/s",2250,4500,900,38,10U,65000,"NVLink 5.0 with NVLink Switch — exclusively an 8-GPU HGX baseboard; 1.44 TB total memory"
+rtx-pro-6000-blackwell,"RTX PRO 6000 Blackwell (Server)",RTX PRO 6000 BW,Blackwell,"Blackwell Generation (2025)",96,GDDR7,1.597,600,pcie,,1000,2000,170,145,"4–8U",8500,"PCIe Gen5 multi-instance — each card runs independently; no NVLink"
+h100-sxm,"NVIDIA H100 SXM5 (HGX)",H100 SXM5,Hopper,"Hopper Generation (2022)",80,HBM3,3.35,700,nvlink,"900 GB/s",1979,3958,400,80,"10–12U",28000,"NVLink 4.0 tensor-parallel — predecessor to H200, same compute die with less memory"
+h100-nvl,"NVIDIA H100 NVL",H100 NVL,Hopper,"Hopper Generation (2022)",94,HBM3,3.9,400,nvlink,"600 GB/s",1671,3341,430,75,"8–10U",22000,"NVLink 4.0 pairs (2-card NVLink bridges); PCIe form factor with NVLink connector"
+h100-pcie,"NVIDIA H100 PCIe",H100 PCIe,Hopper,"Hopper Generation (2022)",80,HBM2e,2.0,350,pcie,,1600,3200,260,110,"4–8U",25000,"PCIe Gen5 multi-instance — no NVLink; each card runs independently"
+rtx-6000-ada,"RTX 6000 Ada Generation",RTX 6000 Ada,"Ada Lovelace","Ada Lovelace (2022)",48,GDDR6,0.96,300,pcie,,91.1,728,65,220,"2–4U",6800,"PCIe Gen4 multi-instance — each card runs independently; no NVLink"

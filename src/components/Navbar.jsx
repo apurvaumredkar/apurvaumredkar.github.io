@@ -1,128 +1,148 @@
-import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
-import homeIcon from '../assets/home.svg'
-import githubIcon from '../assets/github.svg'
-import linkedinIcon from '../assets/linkedin.svg'
-import mailIcon from '../assets/mail.svg'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+
+const navLinks = [
+  { label: 'Background',  section: 'experience' },
+  { label: 'Projects',    section: 'projects' },
+  { label: 'Publication', section: 'publication' },
+  { label: 'Skills',      section: 'skills' },
+]
+
+const appLinks = [
+  { label: 'Throughput Sim', path: '/throughput-sim' },
+  { label: 'LLM Benchmarks', path: '/llm-benchmarks' },
+]
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const close = () => setOpen(false)
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+  const handleNavLink = (section) => {
+    close()
+    if (location.pathname === '/') {
+      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      navigate('/', { state: { scrollTo: section } })
     }
   }
 
-  const socialLinks = [
-    {
-      icon: linkedinIcon,
-      href: 'https://www.linkedin.com/in/apurva-umredkar/',
-      label: 'LinkedIn',
-      hoverText: 'Connect with me',
-    },
-    {
-      icon: githubIcon,
-      href: 'https://github.com/apurvaumredkar',
-      label: 'GitHub',
-      hoverText: 'Check out my projects',
-    },
-    {
-      icon: mailIcon,
-      href: 'mailto:apoorv.umredkar@outlook.com',
-      label: 'Email',
-      hoverText: 'Reach out to me',
-    },
-  ]
-
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${isScrolled
-        ? 'bg-white/70 backdrop-blur-xl shadow-sm py-2'
-        : 'bg-transparent py-6'
-        }`}
-    >
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex items-center justify-center">
-        {/* Navigation Links with Home Button */}
-        <div className="relative flex items-center justify-center bg-white/50 backdrop-blur-md rounded-full px-6 py-3 border border-white/20 shadow-sm w-[95%] max-w-[1100px]">
+    <>
+      {/* Hamburger / Close button — always visible */}
+      <button
+        onClick={() => setOpen(o => !o)}
+        aria-label={open ? 'Close menu' : 'Open menu'}
+        className="fixed top-5 left-5 z-[60] flex flex-col justify-center items-center
+                   w-10 h-10 rounded-full bg-black
+                   shadow-sm hover:shadow-md hover:bg-gray-800
+                   transition-all duration-300 hover:scale-105 gap-[5px]"
+      >
+        <motion.span
+          animate={open ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+          transition={{ duration: 0.2 }}
+          className="block w-5 h-[2px] bg-white rounded-full origin-center"
+        />
+        <motion.span
+          animate={open ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+          transition={{ duration: 0.15 }}
+          className="block w-5 h-[2px] bg-white rounded-full"
+        />
+        <motion.span
+          animate={open ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+          transition={{ duration: 0.2 }}
+          className="block w-5 h-[2px] bg-white rounded-full origin-center"
+        />
+      </button>
 
-          {/* Grid Layout for Perfect Centering */}
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center w-full">
+      <AnimatePresence>
+        {open && (
+          <>
+            {/* Blurred backdrop */}
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={close}
+              className="fixed inset-0 z-40 bg-black/10 backdrop-blur-sm"
+            />
 
-            {/* Left Side - Distributed Evenly */}
-            <div className="hidden md:flex justify-around items-center w-full pr-8">
-              <button
-                onClick={() => scrollToSection('experience')}
-                className="text-xs font-bold text-gray-600 hover:text-black transition-all duration-300 uppercase tracking-widest hover:scale-110"
+            {/* Floating pills — no background panel */}
+            <motion.nav
+              key="sidebar"
+              initial={{ x: -160, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -160, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 320, damping: 32 }}
+              className="fixed left-16 top-20 z-50 flex flex-col gap-2 w-44"
+            >
+              {/* My Portfolio subheading */}
+              <motion.p
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0, duration: 0.22 }}
+                className="w-full text-center text-[10px] font-bold uppercase tracking-widest
+                           text-gray-400 pb-1"
               >
-                Background
-              </button>
-              <button
-                onClick={() => scrollToSection('projects')}
-                className="text-xs font-bold text-gray-600 hover:text-black transition-all duration-300 uppercase tracking-widest hover:scale-110"
-              >
-                Projects
-              </button>
-            </div>
+                — My Portfolio —
+              </motion.p>
 
-            {/* Home Button (Center) */}
-            <div className="flex justify-center">
-              <button
-                onClick={() => scrollToSection('hero')}
-                className="bg-black hover:bg-gray-800 rounded-full p-4 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 flex-shrink-0 z-10"
-                aria-label="Home"
-              >
-                <img src={homeIcon} alt="Home" className="w-6 h-6 brightness-0 invert" />
-              </button>
-            </div>
+              {navLinks.map(({ label, section }, i) => (
+                <motion.button
+                  key={section}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.06 * i, duration: 0.22 }}
+                  onClick={() => handleNavLink(section)}
+                  className="w-full text-center text-xs font-bold uppercase tracking-widest
+                             py-2.5 px-5 rounded-full
+                             bg-white/80 backdrop-blur-md shadow-sm
+                             border border-gray-200 text-gray-700
+                             hover:bg-black hover:text-white hover:border-black
+                             transition-all duration-200"
+                >
+                  {label}
+                </motion.button>
+              ))}
 
-            {/* Right Side - Distributed Evenly */}
-            <div className="hidden md:flex justify-around items-center w-full pl-8">
-              <button
-                onClick={() => scrollToSection('publication')}
-                className="text-xs font-bold text-gray-600 hover:text-black transition-all duration-300 uppercase tracking-widest hover:scale-110"
+              {/* My Apps subheading */}
+              <motion.p
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.06 * navLinks.length, duration: 0.22 }}
+                className="w-full text-center text-[10px] font-bold uppercase tracking-widest
+                           text-gray-400 pt-3 pb-1"
               >
-                Publication
-              </button>
-              <button
-                onClick={() => scrollToSection('skills')}
-                className="text-xs font-bold text-gray-600 hover:text-black transition-all duration-300 uppercase tracking-widest hover:scale-110"
-              >
-                Skills
-              </button>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="text-xs font-bold text-gray-600 hover:text-black transition-all duration-300 uppercase tracking-widest hover:scale-110"
-              >
-                Contact
-              </button>
-            </div>
+                — My Apps —
+              </motion.p>
 
-          </div>
-
-          {/* Mobile Fallback */}
-          <div className="md:hidden flex gap-4 justify-between w-full px-2">
-            <button onClick={() => scrollToSection('experience')} className="text-xs font-bold text-gray-600">Exp</button>
-            <button onClick={() => scrollToSection('projects')} className="text-xs font-bold text-gray-600">Proj</button>
-            <button onClick={() => scrollToSection('hero')} className="bg-black text-white rounded-full p-2"><img src={homeIcon} className="w-4 h-4 invert" /></button>
-            <button onClick={() => scrollToSection('publication')} className="text-xs font-bold text-gray-600">Pub</button>
-            <button onClick={() => scrollToSection('contact')} className="text-xs font-bold text-gray-600">Contact</button>
-          </div>
-        </div>
-      </div>
-    </motion.nav>
+              {appLinks.map(({ label, path }, i) => (
+                <motion.button
+                  key={path}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.06 * (navLinks.length + 1 + i), duration: 0.22 }}
+                  onClick={() => { navigate(path); close() }}
+                  className="w-full text-center text-xs font-bold uppercase tracking-widest
+                             py-2.5 px-5 rounded-full
+                             bg-white/80 backdrop-blur-md shadow-sm
+                             border border-gray-200 text-gray-700
+                             hover:bg-black hover:text-white hover:border-black
+                             transition-all duration-200"
+                >
+                  {label}
+                </motion.button>
+              ))}
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
