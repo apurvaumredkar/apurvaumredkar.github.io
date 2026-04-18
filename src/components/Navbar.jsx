@@ -9,10 +9,6 @@ const navLinks = [
   { label: 'Skills',      section: 'skills' },
 ]
 
-const appLinks = [
-  { label: 'Throughput Sim', path: '/throughput-sim' },
-  { label: 'LLM Benchmarks', path: '/llm-benchmarks' },
-]
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
@@ -110,34 +106,6 @@ const Navbar = () => {
                 </motion.button>
               ))}
 
-              {/* My Apps subheading */}
-              <motion.p
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.06 * navLinks.length, duration: 0.22 }}
-                className="w-full text-center text-[10px] font-bold uppercase tracking-widest
-                           text-gray-400 pt-3 pb-1"
-              >
-                — My Apps —
-              </motion.p>
-
-              {appLinks.map(({ label, path }, i) => (
-                <motion.button
-                  key={path}
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.06 * (navLinks.length + 1 + i), duration: 0.22 }}
-                  onClick={() => { navigate(path); close() }}
-                  className="w-full text-center text-xs font-bold uppercase tracking-widest
-                             py-2.5 px-5 rounded-full
-                             bg-white/80 backdrop-blur-md shadow-sm
-                             border border-gray-200 text-gray-700
-                             hover:bg-black hover:text-white hover:border-black
-                             transition-all duration-200"
-                >
-                  {label}
-                </motion.button>
-              ))}
             </motion.nav>
           </>
         )}

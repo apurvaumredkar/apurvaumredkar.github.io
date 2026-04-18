@@ -9,8 +9,6 @@ import Publication from './components/Publication'
 import Skills from './components/Skills'
 import NetBackground from './components/NetBackground'
 import Contact from './components/Contact'
-import ThroughputSim from './pages/ThroughputSim'
-import LLMBenchmarks from './pages/LLMBenchmarks'
 
 function FloatingActions() {
   const [visible, setVisible] = useState(false)
@@ -121,8 +119,6 @@ function App() {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageWrapper><Portfolio /></PageWrapper>} />
-          <Route path="/throughput-sim" element={<PageWrapper><ThroughputSim /></PageWrapper>} />
-          <Route path="/llm-benchmarks" element={<PageWrapper><LLMBenchmarks /></PageWrapper>} />
         </Routes>
       </AnimatePresence>
     </>
