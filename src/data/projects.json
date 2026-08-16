@@ -2,40 +2,6 @@
   "projects": [
     {
       "id": 1,
-      "title": "Friday: Voice AI Assistant for Discord",
-      "tech": "Parakeet TDT 0.6B, Kokoro 82M, Silero VAD, n8n, Ollama, ONNX",
-      "githubUrl": "https://github.com/apurvaumredkar/friday",
-      "huggingFaceUrl": "",
-      "points": [
-        "Hands-free voice AI assistant that auto-joins your Discord voice channel, listens for speech, transcribes it, queries a local LLM agent, and speaks the response back — all without any commands.",
-        {
-          "title": "Voice Pipeline",
-          "items": [
-            "End-to-end pipeline: Discord voice → Silero VAD → Parakeet TDT 0.6B ASR → n8n webhook → Kokoro 82M TTS → Discord voice",
-            "Real-time voice activity detection with 1.5s silence timeout for natural turn-taking",
-            "Interrupt-on-speech: playback stops immediately if you talk while Friday is speaking"
-          ]
-        },
-        {
-          "title": "Local-first AI",
-          "items": [
-            "Fully local LLM inference via Ollama (granite4:3b-h) — no cloud LLM dependency",
-            "All ASR and TTS models run on-device via ONNX (CPU for ASR/VAD, CUDA for TTS)",
-            "Google Search tool backed by Gemini 2.5 Flash Lite for real-time web lookups"
-          ]
-        },
-        {
-          "title": "n8n Agent Backend",
-          "items": [
-            "Visual low-code agent workflow with three trigger paths: voice (ASR), Discord text messages, and hourly cron",
-            "Exposes a REST /speak endpoint so external systems can trigger voice output without speech input",
-            "Modular design — add new tools or integrations by dropping nodes into the n8n workflow"
-          ]
-        }
-      ]
-    },
-    {
-      "id": 2,
       "title": "UBAssist: RAG-powered University Chatbot",
       "tech": "LLMs, RAG, Cursor, Hugging Face, Docker, FAISS, LoRA, QLoRA",
       "githubUrl": "https://github.com/apurvaumredkar/UBAssist",
@@ -63,7 +29,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 2,
       "title": "Grayscale to RGB Image Colorization",
       "tech": "CNN, UNet, Vision Transformers, GANs, Gradio",
       "githubUrl": "https://github.com/apurvaumredkar/gray2rgb",
@@ -98,7 +64,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 3,
       "title": "Phase Classification in Sleep Signals using CRNNs",
       "tech": "Deep Learning, Inception, GRU, EEG Signal Processing",
       "githubUrl": "https://github.com/apurvaumredkar/CAP-Classification-CRNN",
