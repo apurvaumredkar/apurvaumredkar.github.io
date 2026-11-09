@@ -17,7 +17,8 @@ const Navbar = () => {
 
   const close = () => setOpen(false)
 
-  const handleNavLink = (section) => {
+  const handleNavLink = (e, section) => {
+    e.preventDefault()
     close()
     if (location.pathname === '/') {
       document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' })
@@ -32,8 +33,9 @@ const Navbar = () => {
       <button
         onClick={() => setOpen(o => !o)}
         aria-label={open ? 'Close menu' : 'Open menu'}
+        aria-expanded={open}
         className="fixed top-5 left-5 z-[60] flex flex-col justify-center items-center
-                   w-10 h-10 rounded-full bg-black
+                   w-11 h-11 rounded-full bg-black
                    shadow-sm hover:shadow-md hover:bg-gray-800
                    transition-all duration-300 hover:scale-105 gap-[5px]"
       >
@@ -75,7 +77,8 @@ const Navbar = () => {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -160, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-              className="fixed left-16 top-20 z-50 flex flex-col gap-2 w-44"
+              aria-label="Portfolio sections"
+              className="fixed left-4 md:left-16 top-20 z-50 flex flex-col gap-2 w-48 md:w-44"
             >
               {/* My Portfolio subheading */}
               <motion.p
@@ -89,21 +92,22 @@ const Navbar = () => {
               </motion.p>
 
               {navLinks.map(({ label, section }, i) => (
-                <motion.button
+                <motion.a
                   key={section}
+                  href={`#${section}`}
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.06 * i, duration: 0.22 }}
-                  onClick={() => handleNavLink(section)}
+                  onClick={(e) => handleNavLink(e, section)}
                   className="w-full text-center text-xs font-bold uppercase tracking-widest
-                             py-2.5 px-5 rounded-full
+                             py-3 px-5 rounded-full block
                              bg-white/80 backdrop-blur-md shadow-sm
                              border border-gray-200 text-gray-700
                              hover:bg-black hover:text-white hover:border-black
                              transition-all duration-200"
                 >
                   {label}
-                </motion.button>
+                </motion.a>
               ))}
 
             </motion.nav>

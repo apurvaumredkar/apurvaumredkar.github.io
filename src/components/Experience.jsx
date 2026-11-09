@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useState } from 'react'
 import educationData from '../data/education.json'
@@ -7,7 +7,7 @@ import capgeminiLogo from '../assets/capgemini.svg'
 import ubLogo from '../assets/ub.svg'
 import vnitLogo from '../assets/vnit.svg'
 
-const ExperienceCard = ({ title, roles, company, period, delay, yearRange, logo, active }) => {
+const ExperienceCard = ({ title, roles, company, period, delay, yearRange, logo, active, points }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -17,7 +17,7 @@ const ExperienceCard = ({ title, roles, company, period, delay, yearRange, logo,
   const [startYear, endYear] = yearRange.split(' - ')
 
   return (
-    <div className="flex gap-4 md:gap-12 mb-16 relative group">
+    <div className="flex gap-4 md:gap-12 mb-8 md:mb-16 relative group">
       {/* Timeline marker - hidden on mobile */}
       <div className="hidden md:flex flex-col items-center w-24 relative flex-shrink-0">
         <div className="h-full w-[2px] bg-gray-200 absolute top-0 bottom-0 left-1/2 -translate-x-1/2 group-last:bottom-auto group-last:h-1/2"></div>
@@ -36,7 +36,7 @@ const ExperienceCard = ({ title, roles, company, period, delay, yearRange, logo,
         initial={{ opacity: 0, x: 20 }}
         animate={inView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.6, delay }}
-        className="flex-1 bg-white rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center gap-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-gray-200"
+        className="flex-1 min-w-0 bg-white rounded-3xl p-5 sm:p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-gray-200"
       >
         <div className="flex-1 space-y-4">
           {roles ? (
@@ -52,6 +52,13 @@ const ExperienceCard = ({ title, roles, company, period, delay, yearRange, logo,
                 </div>
               ))}
               <p className="text-lg text-gray-600 font-medium">{company}</p>
+              {points && (
+                <ul className="list-disc pl-5 space-y-2 text-base text-gray-600 leading-relaxed">
+                  {points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              )}
             </>
           ) : (
             <>
@@ -68,7 +75,7 @@ const ExperienceCard = ({ title, roles, company, period, delay, yearRange, logo,
         </div>
         {logo && (
           <div className="flex-shrink-0 md:w-48 w-32 self-start md:self-center opacity-80 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0 duration-500">
-            <img src={logo} alt={company} className="w-full h-auto object-contain" />
+            <img src={logo} alt={`${company} logo`} loading="lazy" decoding="async" className="w-full h-auto object-contain" />
           </div>
         )}
       </motion.div>
@@ -102,7 +109,7 @@ const EducationCard = ({ degree, school, gpa, period, delay, logo }) => {
   const [startYear, endYear] = yearRange.split(' - ')
 
   return (
-    <div className="flex gap-4 md:gap-12 mb-16 relative group">
+    <div className="flex gap-4 md:gap-12 mb-8 md:mb-16 relative group">
       {/* Timeline marker - hidden on mobile */}
       <div className="hidden md:flex flex-col items-center w-24 relative flex-shrink-0">
         <div className="h-full w-[2px] bg-gray-200 absolute top-0 bottom-0 left-1/2 -translate-x-1/2 group-last:bottom-auto group-last:h-1/2"></div>
@@ -121,7 +128,7 @@ const EducationCard = ({ degree, school, gpa, period, delay, logo }) => {
         initial={{ opacity: 0, x: 20 }}
         animate={inView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.6, delay }}
-        className="flex-1 bg-white rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center gap-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-gray-200"
+        className="flex-1 min-w-0 bg-white rounded-3xl p-5 sm:p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-gray-200"
       >
         <div className="flex-1 space-y-4">
           <div>
@@ -135,7 +142,7 @@ const EducationCard = ({ degree, school, gpa, period, delay, logo }) => {
         </div>
         {logo && (
           <div className="flex-shrink-0 md:w-32 w-24 self-start md:self-center opacity-80 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0 duration-500">
-            <img src={logo} alt={school} className="w-full h-auto object-contain" />
+            <img src={logo} alt={`${school} logo`} loading="lazy" decoding="async" className="w-full h-auto object-contain" />
           </div>
         )}
       </motion.div>
@@ -190,13 +197,18 @@ const Experience = () => {
   }))
 
   return (
-    <section id="experience" className="min-h-screen pt-28 bg-transparent">
+    <section id="experience" className="md:min-h-screen pt-24 md:pt-28 bg-transparent">
+      <h2 className="sr-only">Experience and Education</h2>
       {/* Headings section with black background */}
-      <div className="bg-white/80 backdrop-blur-md sticky top-[80px] z-30 shadow-sm border-b border-white/20">
-        <div className="flex w-full max-w-7xl mx-auto">
+      <div className="bg-white/80 backdrop-blur-md sticky top-[64px] md:top-[80px] z-30 shadow-sm border-b border-white/20">
+        <div role="tablist" aria-label="Experience and education" className="flex w-full max-w-7xl mx-auto">
           <button
+            role="tab"
+            id="tab-experience"
+            aria-selected={activeTab === 'experience'}
+            aria-controls="panel-experience"
             onClick={() => setActiveTab('experience')}
-            className={`text-2xl md:text-4xl font-bold py-8 md:py-12 transition-all duration-500 uppercase flex items-center justify-center cursor-pointer relative overflow-hidden group ${activeTab === 'experience'
+            className={`text-lg sm:text-2xl md:text-4xl font-bold py-5 md:py-12 transition-all duration-500 uppercase flex items-center justify-center cursor-pointer relative overflow-hidden group ${activeTab === 'experience'
               ? 'w-[60%] text-white bg-black'
               : 'w-[40%] text-gray-400 bg-gray-50 hover:bg-gray-100'
               }`}
@@ -211,8 +223,12 @@ const Experience = () => {
             )}
           </button>
           <button
+            role="tab"
+            id="tab-education"
+            aria-selected={activeTab === 'education'}
+            aria-controls="panel-education"
             onClick={() => setActiveTab('education')}
-            className={`text-2xl md:text-4xl font-bold py-8 md:py-12 transition-all duration-500 uppercase flex items-center justify-center cursor-pointer relative overflow-hidden group ${activeTab === 'education'
+            className={`text-lg sm:text-2xl md:text-4xl font-bold py-5 md:py-12 transition-all duration-500 uppercase flex items-center justify-center cursor-pointer relative overflow-hidden group ${activeTab === 'education'
               ? 'w-[60%] text-white bg-black'
               : 'w-[40%] text-gray-400 bg-gray-50 hover:bg-gray-100'
               }`}
@@ -230,39 +246,31 @@ const Experience = () => {
       </div>
 
       {/* Content section */}
-      <div className="py-20 px-6 md:px-16 lg:px-32">
+      <div className="py-10 md:py-20 px-4 sm:px-6 md:px-16 lg:px-32">
         <div className="max-w-6xl mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              {activeTab === 'experience' ? (
-                <>
-                  {experiences.map((exp, idx) => (
-                    <ExperienceCard
-                      key={idx}
-                      {...exp}
-                      delay={idx * 0.1}
-                    />
-                  ))}
-                </>
-              ) : (
-                <>
-                  {education.map((edu, idx) => (
-                    <EducationCard
-                      key={idx}
-                      {...edu}
-                      delay={idx * 0.1}
-                    />
-                  ))}
-                </>
-              )}
-            </motion.div>
-          </AnimatePresence>
+          {/* Both panels stay in the DOM (inactive one is `hidden`) so crawlers see all content */}
+          <div
+            role="tabpanel"
+            id="panel-experience"
+            aria-labelledby="tab-experience"
+            hidden={activeTab !== 'experience'}
+            className={activeTab === 'experience' ? 'tab-fade-in' : undefined}
+          >
+            {experiences.map((exp, idx) => (
+              <ExperienceCard key={idx} {...exp} delay={idx * 0.1} />
+            ))}
+          </div>
+          <div
+            role="tabpanel"
+            id="panel-education"
+            aria-labelledby="tab-education"
+            hidden={activeTab !== 'education'}
+            className={activeTab === 'education' ? 'tab-fade-in' : undefined}
+          >
+            {education.map((edu, idx) => (
+              <EducationCard key={idx} {...edu} delay={idx * 0.1} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

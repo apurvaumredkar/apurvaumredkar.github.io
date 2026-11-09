@@ -9,7 +9,7 @@ const Publication = () => {
     })
 
     return (
-        <section id="publication" className="min-h-screen py-32 px-6 md:px-16 lg:px-32 bg-transparent pt-28 relative">
+        <section id="publication" className="md:min-h-screen py-16 md:py-32 px-4 sm:px-6 md:px-16 lg:px-32 bg-transparent pt-24 md:pt-28 relative">
             {/* Background decoration */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-50/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
 
@@ -18,18 +18,18 @@ const Publication = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="text-5xl md:text-6xl font-bold mb-24 text-center uppercase tracking-tight relative z-10"
+                className="text-4xl md:text-6xl font-bold mb-12 md:mb-24 text-center uppercase tracking-tight relative z-10"
             >
                 Publication
             </motion.h2>
 
             <div className="max-w-5xl mx-auto relative z-10">
-                <motion.div
+                <motion.article
                     ref={ref}
                     initial={{ opacity: 0, y: 40 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8 }}
-                    className="bg-white/60 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-white/50 shadow-xl relative overflow-hidden group"
+                    className="bg-white/60 backdrop-blur-xl rounded-3xl p-5 sm:p-8 md:p-12 border border-white/50 shadow-xl relative overflow-hidden group"
                 >
                     {/* Decorative gradient line */}
                     <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
@@ -38,10 +38,10 @@ const Publication = () => {
                         <div className="flex-1">
                             <div className="flex items-center gap-3 mb-4">
                                 <span className="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Journal Paper</span>
-                                <span className="text-gray-500 text-sm font-mono">2023</span>
+                                <time dateTime="2023" className="text-gray-500 text-sm font-mono">2023</time>
                             </div>
 
-                            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight group-hover:text-blue-700 transition-colors duration-300">
+                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight group-hover:text-blue-700 transition-colors duration-300">
                                 Improved search and rescue optimization based load balancing scheme of CCTV footage on edge computing environment
                             </h3>
 
@@ -59,7 +59,7 @@ const Publication = () => {
                                     href="https://onlinelibrary.wiley.com/doi/10.1002/cpe.7556"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 bg-black text-white px-8 py-3 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-gray-800 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                                    className="inline-flex items-center gap-2 bg-black text-white px-6 sm:px-8 py-3 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-gray-800 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                                 >
                                     Read on Wiley
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,7 +88,7 @@ const Publication = () => {
                             </ul>
                         </div>
                     </div>
-                </motion.div>
+                </motion.article>
             </div>
         </section>
     )

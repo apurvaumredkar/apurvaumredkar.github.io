@@ -13,7 +13,9 @@ const PaperModal = ({ paperUrl, onClose }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 backdrop-blur-md bg-white/30 z-50 flex items-center justify-center p-6"
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 backdrop-blur-md bg-white/30 z-50 flex items-center justify-center p-3 md:p-6"
       style={{ backdropFilter: 'blur(12px)' }}
     >
       <motion.div
@@ -22,7 +24,7 @@ const PaperModal = ({ paperUrl, onClose }) => {
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ duration: 0.3 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-white rounded-3xl p-4 w-full max-w-5xl h-[90vh] flex flex-col relative"
+        className="bg-white rounded-3xl p-4 w-full max-w-5xl h-[90dvh] flex flex-col relative"
       >
         {/* Header with Download and Close buttons */}
         <div className="flex justify-between items-center mb-4">
@@ -44,7 +46,7 @@ const PaperModal = ({ paperUrl, onClose }) => {
             </button>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-3xl leading-none transition-colors"
+              className="text-gray-400 hover:text-gray-600 text-3xl leading-none w-10 h-10 shrink-0 transition-colors"
             >
               ×
             </button>
@@ -73,7 +75,9 @@ const ProjectModal = ({ project, onClose }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 backdrop-blur-md bg-white/30 z-50 flex items-center justify-center p-6"
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 backdrop-blur-md bg-white/30 z-50 flex items-center justify-center p-3 md:p-6"
       style={{ backdropFilter: 'blur(12px)' }}
     >
       <motion.div
@@ -82,29 +86,29 @@ const ProjectModal = ({ project, onClose }) => {
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ duration: 0.3 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-white rounded-3xl p-8 md:p-12 max-w-3xl w-full max-h-[80vh] overflow-y-auto"
+        className="bg-white rounded-3xl p-5 sm:p-8 md:p-12 max-w-3xl w-full max-h-[88dvh] md:max-h-[80vh] overflow-y-auto"
       >
         <div className="flex justify-between items-start mb-6">
           <div>
-            <h3 className="text-3xl md:text-4xl font-semibold mb-3">{project.title}</h3>
+            <h3 className="text-2xl md:text-4xl font-semibold mb-3">{project.title}</h3>
             <p className="text-sm text-gray-500 font-mono">{project.tech}</p>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-3xl leading-none transition-colors"
+            className="text-gray-400 hover:text-gray-600 text-3xl leading-none w-10 h-10 shrink-0 transition-colors"
           >
             ×
           </button>
         </div>
         <div className="space-y-4 mb-6">
           {project.points.map((point, idx) => (
-            <div key={idx} className="text-gray-700 leading-relaxed text-lg">
+            <div key={idx} className="text-gray-700 leading-relaxed text-base md:text-lg">
               {typeof point === 'string' ? (
                 <p>{point}</p>
               ) : (
                 <>
                   <p className="font-semibold mb-2">{point.title}</p>
-                  <ul className="list-disc list-inside space-y-1 ml-4">
+                  <ul className="list-disc pl-5 space-y-1">
                     {point.items.map((item, itemIdx) => (
                       <li key={itemIdx}>{item}</li>
                     ))}
@@ -167,7 +171,7 @@ const ProjectModal = ({ project, onClose }) => {
   )
 }
 
-const ProjectCard = ({ title, tech, onClick, delay, colorIndex }) => {
+const ProjectCard = ({ title, tech, summary, onClick, delay, colorIndex }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -184,7 +188,16 @@ const ProjectCard = ({ title, tech, onClick, delay, colorIndex }) => {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay }}
       onClick={onClick}
-      className="bg-white rounded-3xl p-8 aspect-square flex flex-col justify-center items-center shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer group relative overflow-hidden border border-gray-100"
+      role="button"
+      tabIndex={0}
+      aria-haspopup="dialog"
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onClick()
+        }
+      }}
+      className="bg-white rounded-3xl p-6 md:p-8 md:aspect-square flex flex-col justify-center items-center shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer group relative overflow-hidden border border-gray-100"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -194,12 +207,15 @@ const ProjectCard = ({ title, tech, onClick, delay, colorIndex }) => {
       ></div>
 
       <div className="relative z-10 transform transition-transform duration-500 group-hover:-translate-y-2">
-        <h3 className="text-2xl md:text-3xl font-bold mb-4 text-center text-gray-900 group-hover:scale-105 transition-transform duration-300">{title}</h3>
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-center text-gray-900 group-hover:scale-105 transition-transform duration-300">{title}</h3>
         <div className="h-1 w-12 bg-gray-200 mx-auto rounded-full mb-4 group-hover:w-24 group-hover:bg-black transition-all duration-500"></div>
         <p className="text-sm font-mono text-center text-gray-500 max-w-[80%] mx-auto leading-relaxed">{tech}</p>
+        {summary && (
+          <p className="mt-4 text-sm text-gray-600 text-center leading-relaxed line-clamp-4 md:line-clamp-3 max-w-[90%] mx-auto">{summary}</p>
+        )}
       </div>
 
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+      <div className="relative z-10 mt-5 md:mt-0 md:absolute md:bottom-6 md:left-0 md:right-0 flex justify-center md:opacity-0 md:group-hover:opacity-100 transition-all duration-500 md:translate-y-4 md:group-hover:translate-y-0">
         <span className="text-xs font-bold uppercase tracking-widest border-b-2 border-black pb-1">View Project</span>
       </div>
     </motion.div>
@@ -211,7 +227,7 @@ const Projects = () => {
   const projects = projectsData.projects
 
   return (
-    <section id="projects" className="min-h-screen py-32 px-6 md:px-16 lg:px-32 bg-transparent pt-28 relative">
+    <section id="projects" className="md:min-h-screen py-16 md:py-32 px-4 sm:px-6 md:px-16 lg:px-32 bg-transparent pt-24 md:pt-28 relative">
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30 pointer-events-none"></div>
 
       <motion.h2
@@ -219,17 +235,18 @@ const Projects = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-5xl md:text-6xl font-bold mb-24 text-center uppercase tracking-tight relative z-10"
+        className="text-4xl md:text-6xl font-bold mb-12 md:mb-24 text-center uppercase tracking-tight relative z-10"
       >
         Projects
       </motion.h2>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 relative z-10">
         {projects.map((project, idx) => (
           <ProjectCard
             key={project.id}
             title={project.title}
             tech={project.tech}
+            summary={typeof project.points[0] === 'string' ? project.points[0] : ''}
             onClick={() => setSelectedProject(project)}
             delay={idx * 0.15}
             colorIndex={idx}

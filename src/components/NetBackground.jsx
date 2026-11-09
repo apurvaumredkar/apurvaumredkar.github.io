@@ -7,7 +7,7 @@ const NetBackground = () => {
   useEffect(() => {
     // Place a patch in every grid cell with random rotation
     const generatePatches = () => {
-      const gridCols = 6 // Number of columns in grid
+      const gridCols = window.innerWidth < 768 ? 3 : 6 // fewer patches on phones: less to paint
       const gridRows = 3 // Number of rows in grid
       const newPatches = []
 
@@ -46,6 +46,8 @@ const NetBackground = () => {
           key={patch.id}
           src={netSvg}
           alt=""
+          aria-hidden="true"
+          decoding="async"
           className="absolute"
           style={{
             top: `${patch.top}%`,

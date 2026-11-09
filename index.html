@@ -2,32 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script>
-      // GitHub Pages SPA redirect — restore path from query string
-      (function () {
-        var p = window.location.search.match(/[?&]p=([^&]*)/);
-        var h = window.location.search.match(/[?&]h=([^&]*)/);
-        if (p) {
-          window.history.replaceState(
-            null, null,
-            decodeURIComponent(p[1]) + (h ? decodeURIComponent(h[1]) : '')
-          );
-        }
-      })();
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f8fafc" />
     <link rel="icon" type="image/svg+xml" href="/src/assets/net.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://apurvau.dev/" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <title>Apurva Umredkar | Portfolio</title>
-    <meta name="description" content="Portfolio of Apurva Umredkar, an AI Engineer and Researcher specializing in Machine Learning, Deep Learning, and Edge Computing." />
-    <meta property="og:title" content="Apurva Umredkar | Portfolio" />
-    <meta property="og:description" content="Portfolio of Apurva Umredkar, an AI Engineer and Researcher specializing in Machine Learning, Deep Learning, and Edge Computing." />
-    <meta property="og:type" content="website" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <title>Apurva Umredkar | AI Engineer – LLMs, RAG &amp; Machine Learning</title>
+    <meta name="description" content="Apurva Umredkar is an AI Engineer building LLM, RAG and conversational AI systems. MS in CS (AI/ML), University at Buffalo. Projects, publication and resume." />
+    <meta name="author" content="Apurva Umredkar" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Apurva Umredkar" />
+    <meta property="og:url" content="https://apurvau.dev/" />
+    <meta property="og:title" content="Apurva Umredkar | AI Engineer" />
+    <meta property="og:description" content="AI Engineer building LLM, RAG and conversational AI systems. MS in CS (AI/ML), University at Buffalo. Projects, publication and resume." />
+    <meta property="og:image" content="https://apurvau.dev/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Apurva Umredkar, AI Engineer" />
+    <meta property="profile:first_name" content="Apurva" />
+    <meta property="profile:last_name" content="Umredkar" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Apurva Umredkar | AI Engineer" />
+    <meta name="twitter:description" content="AI Engineer building LLM, RAG and conversational AI systems. Projects, publication and resume." />
+    <meta name="twitter:image" content="https://apurvau.dev/og-image.jpg" />
+
+    <!--head-jsonld-->
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

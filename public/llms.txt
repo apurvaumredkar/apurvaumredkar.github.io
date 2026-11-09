@@ -1,0 +1,20 @@
+# Apurva Umredkar
+
+> Apurva Umredkar is an AI Engineer and researcher. He is an AI Software Developer at Vaspian LLC (since February 2026) building RAG chatbots, conversational AI agents and MCP integrations. He holds an MS in Computer Science & Engineering (AI/ML) from the University at Buffalo (completed December 2025) and a BTech in Electronics & Communication Engineering from VNIT Nagpur. Previously a Senior Analyst and Associate Consultant at Capgemini working on SAP BRIM/SOM integrations.
+
+## Profile
+- [Portfolio](https://apurvau.dev/): experience, education, projects, publication, skills and contact details
+- [Resume (PDF)](https://cdn.apurvau.dev/Resume_Apurva_Umredkar.pdf): current resume
+- [LinkedIn](https://www.linkedin.com/in/apurva-umredkar/)
+- [GitHub](https://github.com/apurvaumredkar)
+
+## Projects
+- [UBAssist](https://github.com/apurvaumredkar/UBAssist): RAG-powered university chatbot; fine-tuned Phi 1.5 with LoRA/QLoRA, FAISS hybrid retrieval over 18,000+ documents. [Live demo](https://huggingface.co/spaces/TeamSAS/UB_VSA)
+- [Grayscale to RGB Image Colorization](https://github.com/apurvaumredkar/gray2rgb): U-Net with Vision Transformer blocks and a patch GAN; 94.15% structural similarity. [Live demo](https://huggingface.co/spaces/TeamSAS/ImageColorizer)
+- [Phase Classification in Sleep Signals using CRNNs](https://github.com/apurvaumredkar/CAP-Classification-CRNN): Inception-GRU model for EEG Cyclic Alternating Pattern detection; 74.64% accuracy, 83.4% A-phase sensitivity.
+
+## Publication
+- [Improved search and rescue optimization based load balancing scheme of CCTV footage on edge computing environment](https://onlinelibrary.wiley.com/doi/10.1002/cpe.7556): Concurrency and Computation: Practice and Experience (Wiley), 2023
+
+## Contact
+- Email: apoorv.umredkar@outlook.com

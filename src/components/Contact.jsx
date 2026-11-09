@@ -33,9 +33,9 @@ const Contact = () => {
     ]
 
     return (
-        <section id="contact" className="pt-20 pb-48 px-6 md:px-16 lg:px-32 bg-transparent relative overflow-hidden">
+        <section id="contact" className="pt-16 md:pt-20 pb-40 md:pb-48 px-4 sm:px-6 md:px-16 lg:px-32 bg-transparent relative overflow-hidden">
             {/* Background decoration */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-t from-gray-100 to-transparent rounded-full blur-3xl pointer-events-none -z-10 opacity-50"></div>
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[min(800px,100vw)] h-[400px] bg-gradient-to-t from-gray-100 to-transparent rounded-full blur-3xl pointer-events-none -z-10 opacity-50"></div>
 
             <div className="max-w-4xl mx-auto text-center -translate-y-10">
                 <motion.h2
@@ -43,7 +43,7 @@ const Contact = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="text-5xl md:text-6xl font-bold mb-8 uppercase tracking-tight"
+                    className="text-4xl md:text-6xl font-bold mb-8 uppercase tracking-tight"
                 >
                     Let's Connect
                 </motion.h2>
@@ -68,9 +68,9 @@ const Contact = () => {
                     {/* Email Copy Button */}
                     <button
                         onClick={handleCopyEmail}
-                        className="group relative bg-white border border-gray-200 px-8 py-4 rounded-full flex items-center gap-4 hover:shadow-xl transition-all duration-300 hover:border-gray-300"
+                        className="group relative bg-white border border-gray-200 px-5 sm:px-8 py-3 sm:py-4 rounded-full flex items-center gap-3 sm:gap-4 max-w-full hover:shadow-xl transition-all duration-300 hover:border-gray-300"
                     >
-                        <span className="text-xl md:text-2xl font-mono text-gray-800 group-hover:text-black transition-colors">
+                        <span className="text-sm min-[400px]:text-base sm:text-xl md:text-2xl font-mono text-gray-800 break-all group-hover:text-black transition-colors">
                             {email}
                         </span>
                         <div className="bg-gray-100 p-2 rounded-full group-hover:bg-gray-200 transition-colors">
@@ -91,7 +91,7 @@ const Contact = () => {
                     </button>
 
                     {/* Social Icons */}
-                    <div className="flex gap-8 mt-4">
+                    <div className="flex gap-5 sm:gap-8 mt-4">
                         {socialLinks.map((link) => (
                             <a
                                 key={link.label}
@@ -101,14 +101,14 @@ const Contact = () => {
                                 className="p-3 bg-white rounded-full shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-100"
                                 aria-label={link.label}
                             >
-                                <img src={link.icon} alt={link.label} className="w-14 h-14 opacity-80 hover:opacity-100 transition-opacity" />
+                                <img src={link.icon} alt={link.label} width="56" height="56" className="w-12 h-12 sm:w-14 sm:h-14 opacity-80 hover:opacity-100 transition-opacity" />
                             </a>
                         ))}
                     </div>
                 </motion.div>
             </div>
 
-            <div className="absolute bottom-4 left-0 right-0 text-center text-xs text-gray-400">
+            <div suppressHydrationWarning className="absolute bottom-4 left-0 right-0 text-center text-xs text-gray-400">
                 © {new Date().getFullYear()} Apurva Umredkar
             </div>
         </section>

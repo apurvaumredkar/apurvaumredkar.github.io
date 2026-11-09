@@ -14,13 +14,17 @@ const SkillIcon = ({ skill, delay }) => {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={inView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.5, delay }}
-      className="flex flex-col items-center gap-3 p-4 group"
+      className="flex flex-col items-center gap-3 p-2 sm:p-4 group"
     >
       <div className="w-20 h-20 flex items-center justify-center bg-white rounded-2xl shadow-sm group-hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:-translate-y-2 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <img
           src={skill.icon}
-          alt={skill.name}
+          alt={`${skill.name} logo`}
+          width="40"
+          height="40"
+          loading="lazy"
+          decoding="async"
           className="w-10 h-10 object-contain relative z-10 filter grayscale group-hover:grayscale-0 transition-all duration-300 opacity-70 group-hover:opacity-100"
           onError={(e) => {
             e.target.style.display = 'none'
@@ -44,7 +48,7 @@ const SkillCategory = ({ category, delay }) => {
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay }}
-      className="flex-1 min-w-0 bg-gray-50/50 rounded-3xl p-8 border border-gray-100"
+      className="flex-1 min-w-0 bg-gray-50/50 rounded-3xl p-5 sm:p-8 border border-gray-100"
     >
       <h3 className="text-xl font-bold mb-8 text-center text-gray-900 uppercase tracking-wider border-b border-gray-200 pb-4">{category.title}</h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-center">
@@ -58,13 +62,13 @@ const SkillCategory = ({ category, delay }) => {
 
 const Skills = () => {
   return (
-    <section id="skills" className="min-h-screen py-32 px-6 md:px-16 lg:px-32 bg-transparent pt-28">
+    <section id="skills" className="md:min-h-screen py-16 md:py-32 px-4 sm:px-6 md:px-16 lg:px-32 bg-transparent pt-24 md:pt-28">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-5xl md:text-6xl font-bold mb-24 text-center uppercase tracking-tight"
+        className="text-4xl md:text-6xl font-bold mb-12 md:mb-24 text-center uppercase tracking-tight"
       >
         Technical Skills
       </motion.h2>

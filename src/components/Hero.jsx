@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import profilePic from '../assets/profile.jpg'
-import resumePdf from '../assets/Resume_Apurva_Umredkar.pdf'
+// Hosted on Cloudflare R2 behind the cdn.apurvau.dev custom domain (not in this repo)
+const resumePdf = 'https://cdn.apurvau.dev/Resume_Apurva_Umredkar.pdf'
 
 const ResumeModal = ({ onClose }) => {
   return (
@@ -10,7 +11,10 @@ const ResumeModal = ({ onClose }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 backdrop-blur-md bg-white/30 z-50 flex items-center justify-center p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Resume"
+      className="fixed inset-0 backdrop-blur-md bg-white/30 z-50 flex items-center justify-center p-3 md:p-6"
       style={{ backdropFilter: 'blur(12px)' }}
     >
       <motion.div
@@ -19,7 +23,7 @@ const ResumeModal = ({ onClose }) => {
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ duration: 0.3 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-white rounded-3xl p-4 w-full max-w-5xl h-[90vh] flex flex-col relative"
+        className="bg-white rounded-3xl p-4 w-full max-w-5xl h-[90dvh] flex flex-col relative"
       >
         {/* Header with Download and Close buttons */}
         <div className="flex justify-between items-center mb-4">
@@ -41,7 +45,8 @@ const ResumeModal = ({ onClose }) => {
             </button>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-3xl leading-none transition-colors"
+              aria-label="Close resume"
+              className="text-gray-400 hover:text-gray-600 text-3xl leading-none w-10 h-10 transition-colors"
             >
               ×
             </button>
@@ -65,7 +70,7 @@ const Hero = () => {
   const [showResume, setShowResume] = useState(false)
 
   return (
-    <section id="hero" className="min-h-screen flex flex-col justify-center items-center px-6 bg-transparent pt-28 relative overflow-hidden">
+    <section id="hero" className="min-h-svh flex flex-col justify-center items-center px-6 bg-transparent pt-24 pb-12 md:pt-28 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-blue-100/20 blur-3xl"></div>
@@ -83,7 +88,7 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-10 flex justify-center relative z-50"
+          className="mb-6 md:mb-10 flex justify-center relative z-50"
         >
           <motion.div
             animate={{ y: [0, -10, 0] }}
@@ -93,14 +98,24 @@ const Hero = () => {
             <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 blur-lg opacity-20 scale-110"></div>
             <img
               src={profilePic}
-              alt="Apurva Umredkar"
-              className="w-[230px] h-[230px] md:w-[270px] md:h-[270px] rounded-full object-cover border-4 border-white shadow-2xl relative z-10"
+              alt="Portrait of Apurva Umredkar"
+              width="270"
+              height="270"
+              fetchPriority="high"
+              decoding="async"
+              className="w-[200px] h-[200px] sm:w-[230px] sm:h-[230px] md:w-[270px] md:h-[270px] rounded-full object-cover border-4 border-white shadow-2xl relative z-10"
             />
           </motion.div>
         </motion.div>
 
+        {/* The name is a real <h1>: shown as text on phones, as ASCII art on desktop */}
+        <h1 className="md:sr-only text-4xl sm:text-5xl font-bold uppercase tracking-tight text-gray-900 mb-4">
+          Apurva Umredkar
+        </h1>
+
         <motion.pre
-          className="text-[0.4rem] md:text-[0.6rem] lg:text-xs font-mono mb-6 leading-tight text-gray-900 overflow-x-auto select-none opacity-80 hover:opacity-100 transition-opacity duration-300"
+          aria-hidden="true"
+          className="hidden md:block text-[0.4rem] md:text-[0.6rem] lg:text-xs font-mono mb-6 leading-tight text-gray-900 overflow-x-auto select-none opacity-80 hover:opacity-100 transition-opacity duration-300"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -118,7 +133,7 @@ const Hero = () => {
         </motion.pre>
 
         <motion.p
-          className="text-lg md:text-2xl text-gray-600 mb-12 font-light tracking-widest uppercase"
+          className="text-sm sm:text-lg md:text-2xl text-gray-600 mb-6 font-light tracking-widest uppercase"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -126,8 +141,21 @@ const Hero = () => {
           AI Engineer <span className="mx-2 text-gray-300">|</span> Research Enthusiast
         </motion.p>
 
+        <p className="max-w-2xl mx-auto mb-10 text-base md:text-lg leading-relaxed text-gray-600">
+          AI Software Developer at Vaspian, building RAG chatbots, conversational AI agents and MCP integrations.
+          MS in Computer Science &amp; Engineering (AI/ML) from the University at Buffalo, with prior experience
+          in SAP integrations at Capgemini and published research in edge computing.
+        </p>
+
         <motion.button
-          onClick={() => setShowResume(true)}
+          onClick={() => {
+            // Mobile browsers (notably iOS Safari) can't render PDFs inside an iframe: open natively instead
+            if (window.matchMedia('(max-width: 767px)').matches) {
+              window.open(resumePdf, '_blank', 'noopener')
+            } else {
+              setShowResume(true)
+            }
+          }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           whileHover={{ scale: 1.05 }}

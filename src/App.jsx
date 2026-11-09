@@ -22,7 +22,7 @@ function FloatingActions() {
   }, [])
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-3">
+    <div className="fixed right-4 md:right-6 bottom-[max(1rem,env(safe-area-inset-bottom))] md:bottom-6 z-50 flex flex-col items-center gap-3">
       {/* Back to Top — only after scrolling */}
       <AnimatePresence>
         {visible && (
@@ -36,7 +36,7 @@ function FloatingActions() {
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               aria-label="Back to top"
-              className="text-black text-5xl leading-none
+              className="text-black text-4xl md:text-5xl leading-none w-11 h-11 flex items-center justify-center
                          hover:scale-125 hover:opacity-70 transition-all duration-200"
             >
               ↑
@@ -55,7 +55,7 @@ function FloatingActions() {
         <button
           onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           aria-label="Contact Me"
-          className="px-6 py-3 rounded-full bg-black text-white
+          className="px-5 py-3 md:px-6 rounded-full bg-black text-white
                      text-xs font-bold uppercase tracking-widest shadow-lg whitespace-nowrap
                      hover:bg-gray-800 hover:scale-105 transition-all duration-200"
         >
@@ -84,7 +84,7 @@ function Portfolio() {
   }, [location.state, navigate])
 
   return (
-    <div className="overflow-x-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 text-gray-900 min-h-screen relative selection:bg-black selection:text-white">
+    <div className="overflow-x-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 text-gray-900 min-h-svh relative selection:bg-black selection:text-white">
       <NetBackground />
       <Hero />
       <Experience />
@@ -116,11 +116,13 @@ function App() {
     <>
       <Navbar />
       <FloatingActions />
-      <AnimatePresence mode="wait">
+      <main>
+      <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageWrapper><Portfolio /></PageWrapper>} />
         </Routes>
       </AnimatePresence>
+      </main>
     </>
   )
 }
